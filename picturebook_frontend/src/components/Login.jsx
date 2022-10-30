@@ -1,12 +1,28 @@
-import React from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import shareVideo from '../assets/share.mp4';
-import logo from '../assets/logowhite.png';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import logo from "../assets/logowhite.png";
+import shareVideo from "../assets/share.mp4";
+import { client } from "../client";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
-  const responseGoogle = (response) => {
-    console.log(response);
+  const navigate = useNavigate();
+
+  const responseGoogle = async (response) => {
+    const userObject = jwt_decode(response.credential);
+    localStorage.setItem("user", JSON.stringify(userObject));
+
+    const { name, sub, picture } = userObject;
+    const doc = {
+      _id: sub,
+      _type: "user",
+      userName: name,
+      iamge: picture,
+    };
+
+    client.createIfNotExists(doc).then(() => {
+      navigate("/", { replace: true });
+    });
   };
 
   return (
@@ -28,19 +44,9 @@ export function Login() {
 
           <div className="shadow-2xl">
             <GoogleLogin
-              clientId={import.meta.env.VITE_APP_GOOGLE_API_TOKEN}
-              render={(renderProps) => (
-                <button
-                  className="bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  <FcGoogle className="mr-4" /> Sign in with Google
-                </button>
-              )}
+              data-callback="handleCredentialResponse"
               onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              cookiePolicy="single_host_origin"
+              onError={responseGoogle}
             />
           </div>
         </div>

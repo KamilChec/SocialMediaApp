@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "picturebook"
-  },
   "api": {
     "projectId": "t0k33i00",
     "dataset": "production"
+  },
+  "project": {
+    "name": "picturebook"
   },
   "plugins": [
     "@sanity/base",
