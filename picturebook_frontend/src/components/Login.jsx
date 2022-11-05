@@ -17,7 +17,7 @@ export function Login() {
       _id: sub,
       _type: "user",
       userName: name,
-      iamge: picture,
+      image: picture,
     };
 
     client.createIfNotExists(doc).then(() => {
