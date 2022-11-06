@@ -1,27 +1,27 @@
-import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
-import logo from "../assets/logowhite.png";
-import shareVideo from "../assets/share.mp4";
-import { client } from "../client";
-import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+import { useNavigate } from '../../node_modules/react-router-dom/dist/index';
+import logo from '../assets/logowhite.png';
+import shareVideo from '../assets/share.mp4';
+import { client } from '../client';
 
 export function Login() {
   const navigate = useNavigate();
 
   const responseGoogle = async (response) => {
     const userObject = jwt_decode(response.credential);
-    localStorage.setItem("user", JSON.stringify(userObject));
+    localStorage.setItem('user', JSON.stringify(userObject));
 
     const { name, sub, picture } = userObject;
     const doc = {
       _id: sub,
-      _type: "user",
+      _type: 'user',
       userName: name,
       image: picture,
     };
 
     client.createIfNotExists(doc).then(() => {
-      navigate("/", { replace: true });
+      navigate('/', { replace: true });
     });
   };
 
