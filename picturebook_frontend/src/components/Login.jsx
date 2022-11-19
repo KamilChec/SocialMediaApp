@@ -1,8 +1,8 @@
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
-import { useNavigate } from '../../node_modules/react-router-dom/dist/index';
-import logo from '../assets/logowhite.png';
-import shareVideo from '../assets/share.mp4';
+import { useNavigate } from 'react-router-dom';
+import logo from '../assets/picturebook-low-resolution-logo-white-on-transparent-background.png';
+import shareVideo from '../assets/Social-Media.mp4';
 import { client } from '../client';
 
 export function Login() {
@@ -32,13 +32,13 @@ export function Login() {
           src={shareVideo}
           type="video/mp4"
           loop
-          controls={false}
           muted
           autoPlay
+          controls={false}
           className="w-full h-full object-cover"
         />
-        <div className="absolute flex flex-col justify-center items-center inset-0 bg-blackOverlay">
-          <div className="p-5">
+        <div className="absolute flex flex-col items-center inset-0 bg-blackOverlay">
+          <div className="p-5 mt-20 ml-20">
             <img src={logo} alt="logo" className={logo} />
           </div>
 
