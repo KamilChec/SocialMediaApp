@@ -2,13 +2,14 @@ import { useState, useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Link, Route, Routes } from "react-router-dom";
-import logo from "../assets/logo.png";
-import { Sidebar, UserProfile } from "../components";
 import { useEffect } from "react";
+
+import { Sidebar, UserProfile } from "../components";
 import { userQuery } from "../utils/data";
 import { client } from "../client";
 import { Pins } from "./Pins";
 import { fetchUser } from "../utils/fetchUser";
+import logo from "../assets/picturebook-low-resolution-logo-black-on-transparent-background.png";
 
 export function Home() {
   const [toggleSidebar, setToggleSidebar] = useState(false);
